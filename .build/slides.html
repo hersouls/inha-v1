@@ -2,7 +2,10 @@
 <html lang="ko">
 <head>
 <meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+<meta name="apple-mobile-web-app-capable" content="yes" />
+<meta name="mobile-web-app-capable" content="yes" />
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
 <meta name="theme-color" content="#e0282f" />
 <title>AI 시대의 업무방식 · 발표자료</title>
 <link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin />
@@ -23,8 +26,8 @@
   *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
   html,body{height:100%;overflow:hidden;background:#0c0d10;font-family:var(--font-sans);font-weight:500;color:var(--gray-900);-webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale;letter-spacing:-0.01em;font-feature-settings:"ss01","cv11","tnum"}
 
-  .stage{position:fixed;inset:0;display:grid;place-items:center;overflow:hidden;background:radial-gradient(ellipse 70% 60% at 50% 50%, #1a1c20, #0c0d10)}
-  .deck{position:relative;width:1920px;height:1080px;background:#ffffff;transform-origin:center center;box-shadow:0 0 80px rgba(0,0,0,0.4);overflow:hidden;border-radius:4px}
+  .stage{position:fixed;inset:0;overflow:hidden;background:radial-gradient(ellipse 70% 60% at 50% 50%, #1a1c20, #0c0d10)}
+  .deck{position:absolute;left:50%;top:50%;width:1920px;height:1080px;background:#ffffff;transform-origin:center center;transform:translate(-50%,-50%) scale(0.5);box-shadow:0 0 80px rgba(0,0,0,0.4);overflow:hidden;border-radius:4px}
 
   .slide{position:absolute;inset:0;display:flex;flex-direction:column;background:#ffffff;opacity:0;visibility:hidden;transition:opacity 360ms var(--ease-out), visibility 360ms;}
   .slide.is-active{opacity:1;visibility:visible;z-index:2}
@@ -536,10 +539,63 @@
   :fullscreen .stage{background:#000}
   :fullscreen .deck{box-shadow:none;border-radius:0}
 
+  /* ─── Mobile · Portrait rotation prompt ─── */
+  .rotate-prompt{
+    display:none;position:fixed;inset:0;z-index:9999;
+    background:linear-gradient(135deg, var(--kt-red-600), var(--kt-red-700));
+    color:#fff;flex-direction:column;align-items:center;justify-content:center;
+    gap:28px;padding:48px;text-align:center;font-family:var(--font-display);
+    padding-bottom:calc(48px + env(safe-area-inset-bottom));
+    padding-top:calc(48px + env(safe-area-inset-top));
+  }
+  .rotate-prompt__mark{
+    width:60px;height:46px;border-radius:10px;background:#fff;
+    display:grid;place-items:center;color:var(--kt-red-700);
+    font-family:var(--font-display);font-weight:800;font-size:20px;
+    letter-spacing:-0.04em;box-shadow:0 8px 24px rgba(0,0,0,0.20);
+    margin-bottom:8px;
+  }
+  .rotate-prompt__icon{
+    width:88px;height:88px;opacity:0.95;
+    animation:rp-rotate 2.6s ease-in-out infinite;
+  }
+  .rotate-prompt__title{
+    font-weight:200;font-size:30px;letter-spacing:-0.025em;line-height:1.2;
+  }
+  .rotate-prompt__title strong{font-weight:600}
+  .rotate-prompt__sub{
+    font-weight:400;font-size:14px;opacity:0.88;line-height:1.6;max-width:300px;
+  }
+  .rotate-prompt__sub code{
+    font-family:var(--font-mono);background:rgba(255,255,255,0.18);
+    padding:2px 7px;border-radius:4px;font-size:12.5px;
+  }
+  @keyframes rp-rotate{
+    0%,52%{transform:rotate(0)}
+    72%,100%{transform:rotate(-90deg)}
+  }
+
+  /* Phone portrait — show rotation prompt, hide deck/nav */
+  @media (max-width:600px) and (orientation:portrait){
+    .stage,.deck-nav,.deck-hint{display:none !important}
+    .rotate-prompt{display:flex}
+  }
+
+  /* Mobile landscape — fill viewport, respect safe area */
+  @media (max-height:500px) and (orientation:landscape){
+    .stage{background:#000;padding-left:env(safe-area-inset-left);padding-right:env(safe-area-inset-right)}
+    .deck{box-shadow:none;border-radius:0}
+    .deck-nav{bottom:calc(8px + env(safe-area-inset-bottom));transform:translateX(-50%) scale(0.85);transform-origin:bottom center}
+  }
+  /* Tablet/smaller landscape — tighter nav */
+  @media (max-width:1024px) and (orientation:landscape){
+    .deck-nav{bottom:12px}
+  }
+
   @media print{
     .deck-nav, .deck-hint{display:none}
     .stage{position:static;display:block;background:#fff}
-    .deck{transform:none !important;page-break-after:always;box-shadow:none}
+    .deck{position:relative;left:auto;top:auto;transform:none !important;page-break-after:always;box-shadow:none}
     .slide{position:relative;opacity:1;visibility:visible}
     .bar__fill{transform:scaleX(var(--w)) !important}
   }
@@ -4162,6 +4218,18 @@ result = (df
   </div>
 </div>
 
+<div class="rotate-prompt" id="rotate-prompt" aria-hidden="true">
+  <div class="rotate-prompt__mark">KT</div>
+  <svg class="rotate-prompt__icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+    <rect x="3" y="6" width="18" height="12" rx="2.5"/>
+    <line x1="7" y1="22" x2="17" y2="22" opacity="0.7"/>
+    <path d="M19 4l2 2-2 2" stroke-width="1.8"/>
+    <path d="M21 6h-4a3 3 0 0 0-3 3v1" stroke-width="1.8"/>
+  </svg>
+  <div class="rotate-prompt__title">화면을 <strong>가로로</strong> 돌려 주세요</div>
+  <div class="rotate-prompt__sub">본 발표 자료는 <code>16:9</code> 가로 비율로 제작되었습니다.<br/>가로 모드에서 가장 잘 보입니다.</div>
+</div>
+
 <nav class="deck-nav" role="navigation" aria-label="Slide navigation">
   <button id="deck-prev" type="button" aria-label="이전 슬라이드 (←)">
     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="15 18 9 12 15 6"/></svg>
@@ -4227,9 +4295,18 @@ result = (df
     next.disabled = (i === total-1);
   }
   function fit(){
-    var sw = window.innerWidth, sh = window.innerHeight;
+    var sw, sh;
+    // visualViewport gives accurate dimensions on mobile (excludes browser chrome)
+    if (window.visualViewport) {
+      sw = window.visualViewport.width;
+      sh = window.visualViewport.height;
+    } else {
+      sw = window.innerWidth;
+      sh = window.innerHeight;
+    }
     var scale = Math.min(sw/1920, sh/1080);
-    deck.style.transform = 'scale(' + scale + ')';
+    // translate+scale instead of grid centering — more reliable on mobile
+    deck.style.transform = 'translate(-50%, -50%) scale(' + scale + ')';
   }
 
   // Fullscreen
@@ -4257,6 +4334,12 @@ result = (df
   ['fullscreenchange','webkitfullscreenchange','msfullscreenchange'].forEach(function(ev){
     document.addEventListener(ev, function(){ updateFsUi(); fit(); });
   });
+  // Hide fullscreen button when API unsupported (e.g., iOS Safari iPhone)
+  var fsSupported = !!(document.fullscreenEnabled || document.webkitFullscreenEnabled || document.msFullscreenEnabled);
+  if (!fsSupported) {
+    fsBtn.style.display = 'none';
+    fsBtn.classList.remove('is-pulse');
+  }
   fsBtn.addEventListener('click', function(){ fsBtn.classList.remove('is-pulse'); toggleFs(); });
 
   var hintTimer = null;
@@ -4281,6 +4364,13 @@ result = (df
     toggleFs();
   });
   window.addEventListener('resize', fit);
+  window.addEventListener('orientationchange', function(){
+    setTimeout(fit, 100);
+    setTimeout(fit, 400);
+  });
+  if (window.visualViewport) {
+    window.visualViewport.addEventListener('resize', fit);
+  }
   fit();
   prev.disabled = true;
   updateFsUi();

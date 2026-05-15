@@ -28,3 +28,7 @@ __pycache__/
 *.pyc
 .venv/
 venv/
+
+# Sensitive / temp
+_PREVIEW_*.html
+*.bak

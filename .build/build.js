@@ -430,8 +430,8 @@ const html = `<!DOCTYPE html>
   function renderDocument(html) {
     var fsScript =
       '<' + 'script>(' + tryFullscreen.toString() + ')();</' + 'script>';
-    if (/<\/body>/i.test(html)) {
-      html = html.replace(/<\/body>/i, fsScript + '</body>');
+    if (html.indexOf('</body>') !== -1) {
+      html = html.replace('</body>', fsScript + '</body>');
     } else {
       html = html + fsScript;
     }

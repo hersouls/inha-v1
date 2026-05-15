@@ -1,0 +1,272 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>인하대 연구실 RAG 챗봇 — 프리뷰</title>
+<link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable.min.css">
+<style>
+  :root{
+    --kt-red-500:#e0282f; --kt-red-600:#bb1b21; --kt-red-700:#8e1419;
+    --kt-red-50:#fdeded; --kt-red-100:#fad5d6;
+    --gray-50:#f3f4f6; --gray-100:#e9eaee; --gray-200:#c7cad1;
+    --gray-300:#adb1b9; --gray-400:#8b8f97; --gray-500:#6f737b;
+    --gray-600:#55585d; --gray-700:#3d3f43; --gray-800:#232425;
+    --gray-900:#191a1b;
+    --font-sans:"Pretendard Variable","Pretendard",-apple-system,BlinkMacSystemFont,"Segoe UI",system-ui,sans-serif;
+  }
+  *{box-sizing:border-box}
+  html,body{margin:0;padding:0;height:100%;font-family:var(--font-sans);color:var(--gray-900);background:var(--gray-50)}
+  body{display:flex;flex-direction:column;align-items:center;padding:24px;gap:16px}
+
+  .header{
+    width:100%;max-width:760px;display:flex;justify-content:space-between;align-items:center;
+    padding:14px 18px;background:#fff;border-radius:12px;border:1px solid var(--gray-100);
+  }
+  .header__brand{font-weight:800;font-size:15px;letter-spacing:-0.01em}
+  .header__brand strong{color:var(--kt-red-600)}
+  .header__meta{font-size:12px;color:var(--gray-500)}
+
+  .api-bar{
+    width:100%;max-width:760px;display:flex;gap:8px;align-items:center;
+    padding:12px 14px;background:#fff;border-radius:12px;border:1px solid var(--gray-100);
+  }
+  .api-bar label{font-size:12px;font-weight:700;color:var(--gray-600);white-space:nowrap}
+  .api-bar input{
+    flex:1;border:1px solid var(--gray-200);border-radius:8px;padding:9px 12px;
+    font-family:var(--font-sans);font-size:13px;color:var(--gray-900);outline:none;
+  }
+  .api-bar input:focus{border-color:var(--kt-red-500);box-shadow:0 0 0 3px rgba(224,40,47,.1)}
+  .api-bar button{
+    border:0;background:var(--kt-red-600);color:#fff;font-weight:700;font-size:12.5px;
+    border-radius:8px;padding:9px 14px;cursor:pointer;
+  }
+  .api-bar button:hover{background:var(--kt-red-700)}
+  .api-bar .status{font-size:11.5px;font-weight:700}
+  .status.ok{color:#0a8a3e}
+  .status.err{color:var(--kt-red-600)}
+  .status.warn{color:#b97600}
+
+  .chat{
+    width:100%;max-width:760px;flex:1;min-height:0;display:flex;flex-direction:column;
+    background:#fff;border-radius:12px;border:1px solid var(--gray-100);overflow:hidden;
+  }
+  .chat__msgs{flex:1;overflow-y:auto;padding:20px;display:flex;flex-direction:column;gap:14px}
+  .chat__msgs:empty::before{
+    content:"질문을 입력해 보세요. 예: \"VPP 전압 안정도가 뭐야?\", \"전기자동차 V2G 연구는?\"";
+    color:var(--gray-400);font-size:13px;text-align:center;margin:auto;
+  }
+  .msg{display:flex;gap:10px;align-items:flex-start;animation:fadeIn .2s ease}
+  @keyframes fadeIn{from{opacity:0;transform:translateY(4px)}to{opacity:1;transform:none}}
+  .msg__avatar{
+    flex:0 0 30px;height:30px;border-radius:50%;display:grid;place-items:center;
+    font-size:11px;font-weight:800;color:#fff;
+  }
+  .msg.user .msg__avatar{background:var(--gray-700)}
+  .msg.bot  .msg__avatar{background:linear-gradient(135deg,var(--kt-red-500),var(--kt-red-700))}
+  .msg__body{flex:1;min-width:0}
+  .msg__role{font-size:11px;font-weight:700;color:var(--gray-500);margin-bottom:4px;letter-spacing:0.04em}
+  .msg__text{
+    font-size:14px;line-height:1.65;color:var(--gray-900);
+    background:var(--gray-50);border-radius:10px;padding:11px 14px;white-space:pre-wrap;word-break:break-word;
+  }
+  .msg.user .msg__text{background:var(--gray-100)}
+  .sources{margin-top:8px;display:flex;flex-direction:column;gap:6px}
+  .src{
+    font-size:11.5px;color:var(--gray-700);background:#fff;border:1px solid var(--gray-100);
+    border-left:3px solid var(--kt-red-500);border-radius:6px;padding:8px 10px;
+  }
+  .src__head{display:flex;justify-content:space-between;gap:8px;font-weight:700;color:var(--gray-800);margin-bottom:3px}
+  .src__score{color:var(--kt-red-600);font-variant-numeric:tabular-nums}
+  .src__path{color:var(--gray-500);font-weight:500;font-size:11px}
+  .src__text{color:var(--gray-600);line-height:1.5}
+
+  .chat__input{
+    border-top:1px solid var(--gray-100);padding:12px;display:flex;gap:8px;background:#fff;
+  }
+  .chat__input textarea{
+    flex:1;resize:none;border:1px solid var(--gray-200);border-radius:10px;padding:10px 12px;
+    font-family:var(--font-sans);font-size:14px;line-height:1.5;outline:none;min-height:42px;max-height:120px;
+  }
+  .chat__input textarea:focus{border-color:var(--kt-red-500);box-shadow:0 0 0 3px rgba(224,40,47,.1)}
+  .chat__input button{
+    border:0;background:linear-gradient(135deg,var(--kt-red-500),var(--kt-red-700));color:#fff;
+    font-weight:700;font-size:14px;border-radius:10px;padding:0 18px;cursor:pointer;min-width:64px;
+  }
+  .chat__input button:disabled{background:var(--gray-300);cursor:not-allowed}
+
+  .typing{display:inline-block;width:18px;text-align:left}
+  .typing::after{content:"●";animation:dots 1.2s steps(3,end) infinite}
+  @keyframes dots{0%{content:"●"}33%{content:"● ●"}66%{content:"● ● ●"}}
+
+  .footer{font-size:11px;color:var(--gray-400);max-width:760px;width:100%;text-align:center}
+</style>
+</head>
+<body>
+
+<div class="header">
+  <div class="header__brand">인하대 전력시스템 연구실 · <strong>RAG 챗봇 프리뷰</strong></div>
+  <div class="header__meta" id="meta">로딩 중…</div>
+</div>
+
+<div class="api-bar">
+  <label for="apikey">OpenAI API Key</label>
+  <input id="apikey" type="password" placeholder="sk-..." autocomplete="off" />
+  <button id="save">저장</button>
+  <span class="status" id="status">미설정</span>
+</div>
+
+<div class="chat">
+  <div class="chat__msgs" id="msgs"></div>
+  <div class="chat__input">
+    <textarea id="input" placeholder="질문을 입력하세요. (Shift+Enter 줄바꿈, Enter 전송)"></textarea>
+    <button id="send" disabled>전송</button>
+  </div>
+</div>
+
+<div class="footer">
+  단독 프리뷰 · API 키는 브라우저 localStorage에만 저장되며 OpenAI 외 외부로 전송되지 않습니다.
+</div>
+
+<script src="vector_db.js"></script>
+<script src="rag_client.js"></script>
+
+<script>
+(async () => {
+  const $ = id => document.getElementById(id);
+  const meta = $('meta');
+  const statusEl = $('status');
+  const apiInput = $('apikey');
+  const saveBtn = $('save');
+  const sendBtn = $('send');
+  const inputEl = $('input');
+  const msgsEl = $('msgs');
+
+  if (window.VECTOR_DB_META) {
+    meta.textContent = `${VECTOR_DB_META.count} 청크 · ${VECTOR_DB_META.model} (${VECTOR_DB_META.dimensions}d)`;
+  }
+
+  let rag;
+  try {
+    rag = await RAGClient.init();
+  } catch (e) {
+    meta.textContent = '벡터 DB 로드 실패';
+    msgsEl.innerHTML = `<div class="msg bot"><div class="msg__avatar">!</div><div class="msg__body"><div class="msg__role">SYSTEM</div><div class="msg__text">${e.message}</div></div></div>`;
+    return;
+  }
+
+  const KEY_STORE = 'inha_rag_openai_key';
+  const savedKey = localStorage.getItem(KEY_STORE) || '';
+  if (savedKey) {
+    apiInput.value = savedKey;
+    rag.setApiKey(savedKey);
+    statusEl.textContent = '저장됨';
+    statusEl.className = 'status ok';
+    sendBtn.disabled = false;
+  } else {
+    statusEl.textContent = '키 입력 필요';
+    statusEl.className = 'status warn';
+  }
+  saveBtn.addEventListener('click', () => {
+    const k = apiInput.value.trim();
+    if (!k.startsWith('sk-')) {
+      statusEl.textContent = '형식 오류 (sk- 로 시작)';
+      statusEl.className = 'status err';
+      return;
+    }
+    localStorage.setItem(KEY_STORE, k);
+    rag.setApiKey(k);
+    statusEl.textContent = '저장됨';
+    statusEl.className = 'status ok';
+    sendBtn.disabled = false;
+  });
+
+  function escapeHtml(s) {
+    return String(s).replace(/[&<>"']/g, c => ({
+      '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;'
+    }[c]));
+  }
+
+  function addMsg(role, text) {
+    const wrap = document.createElement('div');
+    wrap.className = `msg ${role}`;
+    wrap.innerHTML = `
+      <div class="msg__avatar">${role === 'user' ? 'You' : 'AI'}</div>
+      <div class="msg__body">
+        <div class="msg__role">${role === 'user' ? '질문' : 'INHA RAG'}</div>
+        <div class="msg__text"></div>
+      </div>`;
+    wrap.querySelector('.msg__text').textContent = text;
+    msgsEl.appendChild(wrap);
+    msgsEl.scrollTop = msgsEl.scrollHeight;
+    return wrap.querySelector('.msg__text');
+  }
+
+  function addSources(sources) {
+    const wrap = document.createElement('div');
+    wrap.className = 'sources';
+    sources.forEach((s, i) => {
+      const div = document.createElement('div');
+      div.className = 'src';
+      const preview = s.text.replace(/\s+/g, ' ').slice(0, 160);
+      div.innerHTML = `
+        <div class="src__head">
+          <span>📎 ${i + 1}. ${escapeHtml(s.source.slice(0, 64))}</span>
+          <span class="src__score">score ${s.score.toFixed(3)}</span>
+        </div>
+        <div class="src__path">${escapeHtml(s.section || '(섹션 없음)')}</div>
+        <div class="src__text">${escapeHtml(preview)}…</div>`;
+      wrap.appendChild(div);
+    });
+    msgsEl.lastChild.querySelector('.msg__body').appendChild(wrap);
+    msgsEl.scrollTop = msgsEl.scrollHeight;
+  }
+
+  let busy = false;
+  async function send() {
+    if (busy) return;
+    const q = inputEl.value.trim();
+    if (!q) return;
+    busy = true;
+    sendBtn.disabled = true;
+    inputEl.value = '';
+    addMsg('user', q);
+    const targetEl = addMsg('bot', '');
+    targetEl.innerHTML = '<span class="typing"></span>';
+    try {
+      let firstToken = true;
+      const result = await rag.chat(q, {
+        onToken: (delta, full) => {
+          if (firstToken) {
+            targetEl.textContent = '';
+            firstToken = false;
+          }
+          targetEl.textContent = full;
+          msgsEl.scrollTop = msgsEl.scrollHeight;
+        },
+      });
+      if (firstToken) targetEl.textContent = result.text;
+      addSources(result.sources);
+    } catch (e) {
+      targetEl.textContent = `오류: ${e.message}`;
+      targetEl.style.color = 'var(--kt-red-600)';
+    } finally {
+      busy = false;
+      sendBtn.disabled = false;
+      inputEl.focus();
+    }
+  }
+
+  sendBtn.addEventListener('click', send);
+  inputEl.addEventListener('keydown', e => {
+    if (e.key === 'Enter' && !e.shiftKey) {
+      e.preventDefault();
+      send();
+    }
+  });
+})();
+</script>
+
+</body>
+</html>

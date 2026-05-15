@@ -520,6 +520,12 @@
   .deck-counter em{font-style:normal;color:#fff;font-weight:800}
   .deck-counter span.sep{color:rgba(255,255,255,0.4);margin:0 2px}
   .deck-nav__sep{width:1px;height:18px;background:rgba(255,255,255,0.18);margin:0 4px}
+  /* Prominent fullscreen button — labeled + pulse on load */
+  .deck-nav #deck-fs{width:auto;padding:0 14px;gap:6px;display:flex;align-items:center}
+  .deck-fs__label{font-family:var(--font-display);font-weight:700;font-size:12px;color:#fff;letter-spacing:-0.005em;line-height:1}
+  @keyframes deck-fs-pulse{0%,100%{box-shadow:0 0 0 0 rgba(224,40,47,0.55), 0 0 0 0 rgba(224,40,47,0)}50%{box-shadow:0 0 0 6px rgba(224,40,47,0.0), 0 0 0 0 rgba(224,40,47,0.18)}}
+  .deck-nav #deck-fs.is-pulse{background:linear-gradient(135deg, var(--kt-red-500), var(--kt-red-700));animation:deck-fs-pulse 1.6s ease-out 4}
+  .deck-nav #deck-fs.is-pulse:hover{background:linear-gradient(135deg, var(--kt-red-600), var(--kt-red-700))}
 
   .deck-hint{position:fixed;bottom:80px;left:50%;transform:translateX(-50%);color:rgba(255,255,255,0.92);font-family:var(--font-display);font-weight:600;font-size:12px;letter-spacing:0.04em;padding:6px 14px;border-radius:999px;background:rgba(19,20,21,0.78);backdrop-filter:blur(10px);box-shadow:0 8px 24px rgba(0,0,0,0.25);pointer-events:none;z-index:100;opacity:0;transition:opacity 240ms ease}
   .deck-hint.is-show{opacity:1}
@@ -1887,7 +1893,7 @@
           <div class="wf-step wf-step--new">
             <span class="wf-step__num">5</span>
             <span class="wf-step__title">보고서 작성</span>
-            <span class="wf-step__tool"><strong>Claude Code</strong></span>
+            <span class="wf-step__tool"><strong>Antigravity · Claude CLI</strong></span>
             <span class="wf-step__desc">단일 <strong>HTML</strong> · Plotly 인터랙티브 차트</span>
           </div>
           <div class="wf-step wf-step--new">
@@ -1917,7 +1923,7 @@
           <div class="info-card">
             <h3>도구 스택</h3>
             <div class="tool-chips">
-              <span class="tool-chip kt"><strong>Claude Code</strong></span>
+              <span class="tool-chip kt"><strong>Antigravity · Claude CLI</strong></span>
               <span class="tool-chip"><strong>MarkItDown</strong></span>
               <span class="tool-chip"><strong>Jupyter</strong> notebook</span>
               <span class="tool-chip"><strong>pandas</strong></span>
@@ -2151,7 +2157,7 @@ result = (df
           <span class="s-indicator__label">보고서 자동 생성 — PPT가 사라진다</span>
           <span class="s-indicator__line"></span>
         </div>
-        <h2 class="s-title">Claude Code → <strong>단일 HTML 보고서</strong></h2>
+        <h2 class="s-title">Antigravity · Claude CLI → <strong>단일 HTML 보고서</strong></h2>
         <p class="s-lead">분석된 데이터·인사이트·차트가 <strong>같은 환경에서 곧바로 HTML로 합쳐진다</strong>. PowerPoint 디자인 작업이 사라지고, Word 본문 옮기기도 사라진다.</p>
 
         <div class="hero-stat">
@@ -2301,7 +2307,7 @@ result = (df
             <div class="qa-flow">
               <div class="qa-step">
                 <span class="qa-step__n">1</span>
-                <div class="qa-step__title">AI 생성<small>Claude Code → 단일 HTML 보고서 작성</small></div>
+                <div class="qa-step__title">AI 생성<small>Antigravity · Claude CLI → 단일 HTML 보고서 작성</small></div>
                 <span class="qa-step__time">자동</span>
               </div>
               <div class="qa-step">
@@ -2412,7 +2418,7 @@ result = (df
               <div class="tl-step"><span class="tl-step__tool">MarkItDown</span><span class="tl-step__what">자동 변환 .md / .csv</span></div>
               <div class="tl-step"><span class="tl-step__tool">Jupyter</span><span class="tl-step__what">pandas 분석</span></div>
               <div class="tl-step"><span class="tl-step__tool">Claude</span><span class="tl-step__what">인사이트 · 차트 추천</span></div>
-              <div class="tl-step"><span class="tl-step__tool">Claude Code</span><span class="tl-step__what">HTML 자동 생성</span></div>
+              <div class="tl-step"><span class="tl-step__tool">Antigravity · Claude CLI</span><span class="tl-step__what">HTML 자동 생성</span></div>
               <div class="tl-step"><span class="tl-step__tool">Playwright</span><span class="tl-step__what">시각 자동 검증</span></div>
               <div class="tl-step"><span class="tl-step__tool">단일 URL</span><span class="tl-step__what">링크 한 줄</span></div>
             </div>
@@ -2653,7 +2659,11 @@ result = (df
               <span class="src-cell__title">생성 · 작성 도구</span>
             </div>
             <ul>
-              <li><strong>Claude Code</strong> · 분석 코드 · HTML 보고서 작성<span class="url">code.claude.com</span></li>
+              <li><strong>조합 A · Antigravity (Gemini IDE)</strong> — Google AI 구독자 · Gemini 3 agentic IDE<span class="url">antigravity.google</span></li>
+              <li><strong>조합 B · Claude CLI</strong> — Anthropic 구독자 · CLI 표준<span class="url">code.claude.com</span></li>
+              <li><strong>조합 C · Codex CLI</strong> — OpenAI · ChatGPT 구독자<span class="url">github.com/openai/codex</span></li>
+              <li><strong>조합 D · 동시 활용</strong> — A+B(본 발표자) 또는 A+C · B+C 등 자유 조합</li>
+              <li><strong>조합 E · Ollama + 위 도구</strong> — 폐쇄망 · 프라이버시 우선</li>
               <li><strong>Cursor · Codex CLI</strong> · 동일한 SKILL.md / CLAUDE.md 호환</li>
               <li><strong>Anthropic Claude API</strong> · 폐쇄망 배포 시 사내 API 게이트웨이 경유</li>
             </ul>
@@ -2934,11 +2944,11 @@ result = (df
             <span class="big-step__num">②</span>
             <span class="big-step__title">AI 프로토타입</span>
             <div class="big-step__tool">
-              <span class="tool-chip kt"><strong>Claude Code</strong></span>
+              <span class="tool-chip kt"><strong>Antigravity · Claude CLI</strong></span>
               <span style="color:var(--kt-red-500);font-weight:800">→</span>
               <span class="tool-chip"><strong>React 19 + Firebase</strong></span>
             </div>
-            <span class="big-step__desc">AI가 <code class="inline">src/</code> 전체를 작성한다. <strong>30 Zustand 스토어 · 25+ Firestore 컬렉션 · 3 역할 · 5계위 계약</strong>. 동작하는 v1이 2~4주에 완성된다.</span>
+            <span class="big-step__desc"><strong>구독 환경에 따라 — Antigravity(Google) · Claude CLI(Anthropic) · Codex CLI(OpenAI)</strong> 중 보유한 도구가 <code class="inline">src/</code> 전체를 작성한다. 30 Zustand 스토어 · 25+ Firestore 컬렉션 · 3 역할 · 5계위 계약. 동작하는 v1이 2~4주에 완성.</span>
           </div>
           <div class="big-step">
             <span class="big-step__num">③</span>
@@ -3092,7 +3102,7 @@ result = (df
           <div class="hero-stat__num" style="font-size:80px">2~4<small> 주</small></div>
           <div class="hero-stat__text">
             <div class="hero-stat__label">동작 가능한 프로토타입 v1 완성 시간</div>
-            <div class="hero-stat__sub">AI는 <strong>보일러플레이트를 가져가고, 사람은 판단을 가져온다.</strong> 개발자가 줄일 수 있는 일이 아니라 <em>새로 추가되는 영역(도메인 검토 · 보안 · 확장 설계)이 늘어난다</em>는 점이 핵심.<br/><em>예시 — KT 직접PPA: src/ 전체(30+ 스토어 · 25+ 컬렉션 · 3 역할 · 5 계위 계약 검증)를 AI가 작성하고, 사람은 정산 엔진 비즈니스 결정 · 권한 격리 검증에 집중.</em></div>
+            <div class="hero-stat__sub">AI는 <strong>보일러플레이트를 가져가고, 사람은 판단을 가져온다.</strong> 개발자가 줄일 수 있는 일이 아니라 <em>새로 추가되는 영역(도메인 검토 · 보안 · 확장 설계)이 늘어난다</em>는 점이 핵심.<br/><em>예시 — KT 직접PPA: src/ 전체(30+ 스토어 · 25+ 컬렉션 · 3 역할 · 5 계위 계약 검증)를 <strong>Antigravity · Claude CLI</strong>가 작성하고, 사람은 정산 엔진 비즈니스 결정 · 권한 격리 검증에 집중.</em></div>
           </div>
         </div>
       </div>
@@ -3475,7 +3485,7 @@ result = (df
               <div class="tl-step"><span class="tl-step__tool">요구사항.md</span><span class="tl-step__what">Markdown</span></div>
               <div class="tl-step"><span class="tl-step__tool">staticrypt</span><span class="tl-step__what">단일 HTML 설계서</span></div>
               <div class="tl-step"><span class="tl-step__tool">함께 보기</span><span class="tl-step__what">실시간 합의</span></div>
-              <div class="tl-step"><span class="tl-step__tool">Claude Code</span><span class="tl-step__what">src/ 자동 작성</span></div>
+              <div class="tl-step"><span class="tl-step__tool">Antigravity · Claude CLI</span><span class="tl-step__what">src/ 자동 작성</span></div>
               <div class="tl-step"><span class="tl-step__tool">RAG 챗봇</span><span class="tl-step__what">도메인 내장</span></div>
               <div class="tl-step"><span class="tl-step__tool">Playwright</span><span class="tl-step__what">시각 QA</span></div>
               <div class="tl-step"><span class="tl-step__tool">단일 URL</span><span class="tl-step__what">즉시 배포</span></div>
@@ -3540,7 +3550,7 @@ result = (df
           <div class="rec">
             <span class="rec__num">③</span>
             <span class="rec__title">프로토타입은 AI가 작성</span>
-            <span class="rec__desc">Claude Code로 React/Firebase 코드 작성. 사람은 도메인 정합성·성능·보안 검토</span>
+            <span class="rec__desc">Antigravity · Claude CLI로 코드 작성 · 사람은 도메인·보안 검토</span>
           </div>
           <div class="rec">
             <span class="rec__num">④</span>
@@ -3650,7 +3660,11 @@ result = (df
             </div>
             <ul>
               <li><strong>Anthropic Claude API</strong> · messages · stream · tool-call<span class="url">docs.claude.com</span></li>
-              <li><strong>Claude Code</strong> · src/ 자동 작성 · 시각 검증</li>
+              <li><strong>조합 A · Antigravity (Gemini IDE)</strong> — Google AI 구독자 · Gemini 3 agentic IDE</li>
+              <li><strong>조합 B · Claude CLI</strong> — Anthropic 구독자 · CLI 표준</li>
+              <li><strong>조합 C · Codex CLI</strong> — OpenAI · ChatGPT 구독자</li>
+              <li><strong>조합 D · 동시 활용</strong> — A+B(본 발표자) 또는 A+C · B+C 자유 조합</li>
+              <li><strong>조합 E · Ollama + 위 도구</strong> — 폐쇄망 · 프라이버시</li>
               <li><strong>Playwright MCP</strong> · 시각 QA 자동화</li>
               <li><strong>staticrypt</strong> · 단일 HTML 비밀번호 보호<span class="url">github.com/robinmoisson/staticrypt</span></li>
               <li><strong>MarkItDown</strong> · Word/PDF → Markdown</li>
@@ -3885,7 +3899,7 @@ result = (df
           <div class="takeaway__icon">⤞</div>
           <div>
             <div class="takeaway__label">왜 AI 시대에 결정적인가</div>
-            <div class="takeaway__text">볼트 폴더가 <strong>모든 기기에 동일하게 존재</strong>하면 — Claude Code · Cursor · 로컬 LLM이 <strong>"내 지식 전체"를 LLM 컨텍스트로 즉시 활용</strong>한다. 별도 변환 · 파싱 · 업로드 단계가 없다. <em>월 $8이 만드는 가장 효율적인 개인 지식 인프라.</em></div>
+            <div class="takeaway__text">볼트 폴더가 <strong>모든 기기에 동일하게 존재</strong>하면 — Antigravity · Claude CLI · 로컬 LLM이 <strong>"내 지식 전체"를 LLM 컨텍스트로 즉시 활용</strong>한다. 별도 변환 · 파싱 · 업로드 단계가 없다. <em>월 $8이 만드는 가장 효율적인 개인 지식 인프라.</em></div>
           </div>
         </div>
       </div>
@@ -3982,7 +3996,7 @@ result = (df
             <ul>
               <li><strong>로컬 LLM</strong> · Llama 3 · Mistral · Qwen via <code>Ollama</code> · <code>LM Studio</code></li>
               <li><strong>개인 RAG</strong> · Obsidian 볼트 + 메모 → 로컬 벡터 인덱스</li>
-              <li><strong>에이전트 작업</strong> · Claude Code · Cursor · 자동 PR · 리팩터</li>
+              <li><strong>에이전트 작업</strong> · Antigravity · Claude CLI · 자동 PR · 리팩터</li>
               <li><strong>배치 작업</strong> · 메일 분류 · 회의록 요약 · 자료 정리 (밤새)</li>
               <li><strong>이미지 · 음성</strong> · Stable Diffusion · Whisper · TTS</li>
             </ul>
@@ -4063,7 +4077,7 @@ result = (df
               <div class="arch-row__desc">로컬 LLM(Llama · Mistral) + 개인 RAG(메모 벡터 인덱스) + 에이전트 — <strong>"내 일을 아는 AI"</strong></div>
             </div>
             <div class="arch-row__tech">
-              <span class="strong">Ollama</span><span>Local RAG</span><span>Claude Code</span><span>Agents</span>
+              <span class="strong">Ollama</span><span>Local RAG</span><span class="strong">Antigravity</span><span class="strong">Claude CLI</span><span class="strong">Codex CLI</span><span>Agents</span>
             </div>
           </div>
           <div class="arch-arrow-row">
@@ -4127,7 +4141,7 @@ result = (df
           <div class="rec">
             <span class="rec__num">⑤</span>
             <span class="rec__title">로컬 RAG 구축</span>
-            <span class="rec__desc">개인 메모 → 벡터 → Claude Code · Cursor 참조</span>
+            <span class="rec__desc">개인 메모 → 벡터 → Antigravity · Claude CLI 참조</span>
           </div>
         </div>
 
@@ -4157,7 +4171,7 @@ result = (df
     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="9 18 15 12 9 6"/></svg>
   </button>
   <span class="deck-nav__sep" aria-hidden="true"></span>
-  <button id="deck-fs" type="button" aria-label="전체 화면 (F)" title="전체 화면 (F)">
+  <button id="deck-fs" type="button" aria-label="전체 화면 (F)" title="전체 화면 (F)" class="is-pulse">
     <svg class="deck-fs__enter" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
       <path d="M4 9V5a1 1 0 0 1 1-1h4"/><path d="M20 9V5a1 1 0 0 0-1-1h-4"/>
       <path d="M4 15v4a1 1 0 0 0 1 1h4"/><path d="M20 15v4a1 1 0 0 1-1 1h-4"/>
@@ -4166,6 +4180,7 @@ result = (df
       <path d="M9 4v4a1 1 0 0 1-1 1H4"/><path d="M15 4v4a1 1 0 0 0 1 1h4"/>
       <path d="M9 20v-4a1 1 0 0 0-1-1H4"/><path d="M15 20v-4a1 1 0 0 1 1-1h4"/>
     </svg>
+    <span class="deck-fs__label">전체화면</span>
   </button>
 </nav>
 <div class="deck-hint" id="deck-hint" aria-hidden="true">
@@ -4242,7 +4257,7 @@ result = (df
   ['fullscreenchange','webkitfullscreenchange','msfullscreenchange'].forEach(function(ev){
     document.addEventListener(ev, function(){ updateFsUi(); fit(); });
   });
-  fsBtn.addEventListener('click', toggleFs);
+  fsBtn.addEventListener('click', function(){ fsBtn.classList.remove('is-pulse'); toggleFs(); });
 
   var hintTimer = null;
   function showHint(ms){

@@ -415,7 +415,26 @@ const html = `<!DOCTYPE html>
     return bytesToHex(new Uint8Array(bits));
   }
 
+  function tryFullscreen() {
+    try {
+      var doc = document.documentElement;
+      var fn = doc.requestFullscreen || doc.webkitRequestFullscreen || doc.mozRequestFullScreen || doc.msRequestFullscreen;
+      var inFs = document.fullscreenElement || document.webkitFullscreenElement || document.mozFullScreenElement || document.msFullscreenElement;
+      if (fn && !inFs) {
+        var p = fn.call(doc);
+        if (p && typeof p.catch === 'function') p.catch(function () {});
+      }
+    } catch (e) { /* fullscreen blocked / unsupported */ }
+  }
+
   function renderDocument(html) {
+    var fsScript =
+      '<' + 'script>(' + tryFullscreen.toString() + ')();</' + 'script>';
+    if (/<\/body>/i.test(html)) {
+      html = html.replace(/<\/body>/i, fsScript + '</body>');
+    } else {
+      html = html + fsScript;
+    }
     document.open();
     document.write(html);
     document.close();
@@ -445,6 +464,7 @@ const html = `<!DOCTYPE html>
     e.preventDefault();
     var v = pwd.value.trim();
     if (!v) { showError('비밀번호를 입력해 주세요.'); pwd.focus(); return; }
+    tryFullscreen();
     attempt(v, { remember: rememberCb.checked });
   });
 

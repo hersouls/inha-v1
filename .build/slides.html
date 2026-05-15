@@ -73,6 +73,10 @@
   .cover-strip__num{font-family:var(--font-display);font-weight:200;font-size:40px;color:var(--kt-red-600);line-height:1;letter-spacing:-0.03em;margin-bottom:4px}
   .cover-strip__num small{font-size:20px;font-weight:300;color:var(--gray-600)}
   .cover-strip__label{font-size:13px;color:var(--gray-500);font-weight:600;line-height:1.4}
+  .cover-qr{position:absolute;top:64px;right:64px;background:#fff;border:1.5px solid var(--gray-150);border-radius:18px;padding:18px 18px 14px;display:flex;flex-direction:column;align-items:center;gap:12px;box-shadow:0 12px 28px rgba(0,0,0,0.06);z-index:2}
+  .cover-qr img{width:160px;height:160px;display:block;border-radius:6px}
+  .cover-qr__label{font-family:var(--font-display);font-size:13px;font-weight:600;color:var(--gray-600);letter-spacing:0.01em;text-align:center;line-height:1.45}
+  .cover-qr__label strong{color:var(--kt-red-600);font-weight:800}
 
   /* ─── Chapter cover ─── */
   .slide--chap .s-body{justify-content:center;padding-top:24px}
@@ -541,6 +545,12 @@
 
     <!-- ════════════════ Slide 1 · Title ════════════════ -->
     <section class="slide slide--cover is-active" data-slide="1">
+      <aside class="cover-qr" aria-label="모바일에서 이 자료 열기">
+        <img src="https://api.qrserver.com/v1/create-qr-code/?data=https%3A%2F%2Fhersouls.github.io%2Finha-v1%2F&size=320x320&margin=8&format=svg"
+             alt="QR code linking to https://hersouls.github.io/inha-v1/"
+             width="160" height="160" loading="lazy" />
+        <div class="cover-qr__label">스캔하여 <strong>모바일</strong>에서 보기</div>
+      </aside>
       <div class="cover-mark">KT</div>
       <div class="cover-eyebrow">2026 · INSIGHT REPORT</div>
       <h1 class="cover-title">AI 시대의 <strong>업무방식</strong></h1>
@@ -3671,6 +3681,470 @@ result = (df
       </div>
     </section>
 
+    <!-- ════════════════ Slide 45 · Chapter 4 cover ════════════════ -->
+    <section class="slide slide--chap" data-slide="45">
+      <div class="s-head">
+        <div class="s-mark">KT</div>
+        <div><div class="s-head__meta">AI 시대의 업무방식 · 2026</div></div>
+        <div class="s-head__chip">CHAPTER 4</div>
+      </div>
+      <div class="s-body">
+        <div class="chap-eyebrow">CHAPTER 4 · 개인 업무방식</div>
+        <h2 class="chap-title">개인의 지식이<br/><strong>AI의 컨텍스트</strong>가 된다</h2>
+        <p class="chap-sub">Chapter 1~3이 <strong>조직의 일하는 방식</strong>이었다면, Chapter 4는 <strong>개인의 일하는 방식</strong>이다. 한 개인의 메모 · 디바이스 · 컴퓨팅 자원이 어떻게 AI 시대 자산이 되는지.</p>
+        <div class="chap-bullets">
+          <div class="chap-bullet">
+            <div class="chap-bullet__num">축 ①</div>
+            <div class="chap-bullet__title">로컬 마크다운 볼트</div>
+            <div class="chap-bullet__text">Obsidian — 모든 메모가 .md 파일 · 데이터 주권 · AI 입력 즉시 가능</div>
+          </div>
+          <div class="chap-bullet">
+            <div class="chap-bullet__num">축 ②</div>
+            <div class="chap-bullet__title">클라우드 동기 메모 앱</div>
+            <div class="chap-bullet__text">Moonwave Memo(자체 개발) — 웹/모바일 즉시 동기 · LangChain 통합</div>
+          </div>
+          <div class="chap-bullet">
+            <div class="chap-bullet__num">축 ③</div>
+            <div class="chap-bullet__title">AI 전용 PC</div>
+            <div class="chap-bullet__text">로컬 LLM + 개인 RAG — 프라이버시 · 비용 · 레이턴시 모두 해결</div>
+          </div>
+        </div>
+      </div>
+      <div class="s-foot">
+        <span class="s-foot__brand">KT <strong>Enterprise</strong><span class="dot">·</span>AI 시대의 업무방식</span>
+        <span class="s-foot__counter" data-counter></span>
+      </div>
+    </section>
+
+    <!-- ════════════════ Slide 46 · 문제 정의 ════════════════ -->
+    <section class="slide" data-slide="46">
+      <div class="s-head">
+        <div class="s-mark">KT</div>
+        <div><div class="s-head__meta">CHAPTER 4 · 개인 업무방식</div></div>
+        <div class="s-head__chip">4.0 · 문제</div>
+      </div>
+      <div class="s-body">
+        <div class="s-indicator">
+          <span class="s-indicator__num">4.0</span>
+          <span class="s-indicator__label">문제 — 흩어진 개인 지식</span>
+          <span class="s-indicator__line"></span>
+        </div>
+        <h2 class="s-title">개인 지식이 흩어지면 — <strong>AI도 도울 수 없다</strong></h2>
+        <p class="s-lead">메모가 Notion · 카카오톡 · Google Docs · 종이수첩 · 손글씨 노트에 흩어져 있으면, AI에게 매번 컨텍스트를 다시 입력해야 한다. <strong>결과적으로 AI가 "내 일"을 모른다.</strong></p>
+
+        <div class="kpi-grid">
+          <div class="kpi">
+            <div class="kpi__num">5<small>+ 앱</small></div>
+            <div class="kpi__label">메모가 분산 저장된 앱 수</div>
+            <div class="kpi__src">Notion · Apple Notes · 카카오톡 · Google Docs · 종이</div>
+          </div>
+          <div class="kpi">
+            <div class="kpi__num">매번</div>
+            <div class="kpi__label">AI에 컨텍스트 재입력</div>
+            <div class="kpi__src">"내가 누군지" · "어떤 작업 중인지"를 매 세션마다</div>
+          </div>
+          <div class="kpi">
+            <div class="kpi__num">불가</div>
+            <div class="kpi__label">통합 검색</div>
+            <div class="kpi__src">노트가 어느 앱에 있었는지 기억해야 함</div>
+          </div>
+          <div class="kpi">
+            <div class="kpi__num">단절</div>
+            <div class="kpi__label">디바이스 간 노트 흐름</div>
+            <div class="kpi__src">데스크탑 · 노트북 · 폰 · 태블릿이 따로 움직임</div>
+          </div>
+        </div>
+
+        <div class="takeaway" style="margin-top:28px">
+          <div class="takeaway__icon">!</div>
+          <div>
+            <div class="takeaway__label">핵심 문제</div>
+            <div class="takeaway__text">조직 자료를 정렬하는 것(Chapter 1~3)과 <strong>같은 원칙이 개인 지식에도 적용</strong>되어야 한다. 그러지 않으면 AI가 가장 가까이서 도와줄 수 있는 영역 — <em>내 일</em> — 에서 가장 무력하다.</div>
+          </div>
+        </div>
+      </div>
+      <div class="s-foot">
+        <span class="s-foot__brand">KT <strong>Enterprise</strong><span class="dot">·</span>AI 시대의 업무방식</span>
+        <span class="s-foot__counter" data-counter></span>
+      </div>
+    </section>
+
+    <!-- ════════════════ Slide 47 · 3 축 overview ════════════════ -->
+    <section class="slide" data-slide="47">
+      <div class="s-head">
+        <div class="s-mark">KT</div>
+        <div><div class="s-head__meta">CHAPTER 4 · 개인 업무방식</div></div>
+        <div class="s-head__chip">4.1 · 3 축</div>
+      </div>
+      <div class="s-body">
+        <div class="s-indicator">
+          <span class="s-indicator__num">4.1</span>
+          <span class="s-indicator__label">개인 지식 자산화 — 3 가지 축</span>
+          <span class="s-indicator__line"></span>
+        </div>
+        <h2 class="s-title">개인 지식을 자산화하는 <strong>3 가지 축</strong></h2>
+        <p class="s-lead">세 가지 접근이 보완 관계로 합쳐진다. <strong>로컬 마크다운 볼트</strong>로 기록의 단일 진실 원천을 만들고, <strong>클라우드 동기 메모</strong>로 어디서나 접근하고, <strong>AI 전용 PC</strong>가 그 자산을 컨텍스트로 활용한다.</p>
+
+        <div class="big-steps">
+          <div class="big-step">
+            <span class="big-step__num">①</span>
+            <span class="big-step__title">Obsidian + 유료 Sync</span>
+            <div class="big-step__tool">
+              <span class="tool-chip kt"><strong>Obsidian Sync</strong></span>
+              <span class="tool-chip"><strong>$8 / 월</strong></span>
+              <span class="tool-chip">E2EE</span>
+            </div>
+            <span class="big-step__desc"><strong>마크다운 활용의 "끝판왕".</strong> 논문 연구 · 깊은 지식 작업 · 양방향 링크 · 그래프 뷰 · 플러그인 2,000+. <em>월 $8 Obsidian Sync</em>가 멀티디바이스 동기를 완성한다.</span>
+          </div>
+          <div class="big-step">
+            <span class="big-step__num">②</span>
+            <span class="big-step__title">개인화된 자체 메모 앱</span>
+            <div class="big-step__tool">
+              <span class="tool-chip kt"><strong>Moonwave Memo</strong></span>
+              <span class="tool-chip"><strong>웹 · 모바일</strong></span>
+            </div>
+            <span class="big-step__desc"><strong>Obsidian이 부담스럽다면</strong> 자체 메모 앱이 답. 일상 메모 · 가벼운 캡처 · AI 통합 내장. React 19 + Firebase + Tiptap + LangChain. <em>본 발표자 본인 워크플로우</em>.</span>
+          </div>
+          <div class="big-step">
+            <span class="big-step__num">③</span>
+            <span class="big-step__title">AI 전용 PC · 헤드리스 서버</span>
+            <div class="big-step__tool">
+              <span class="tool-chip"><strong>Mac mini M4</strong></span>
+              <span class="tool-chip"><strong>GPU PC</strong></span>
+              <span class="tool-chip">Headless 가능</span>
+            </div>
+            <span class="big-step__desc"><strong>로컬 LLM + 개인 RAG + 에이전트.</strong> 모니터 있는 PC도 가능, <em>모니터 없는 헤드리스 서버</em>로 운영도 가능. SSH·원격 접근. 24/7 배치 작업.</span>
+          </div>
+        </div>
+      </div>
+      <div class="s-foot">
+        <span class="s-foot__brand">KT <strong>Enterprise</strong><span class="dot">·</span>AI 시대의 업무방식</span>
+        <span class="s-foot__counter" data-counter></span>
+      </div>
+    </section>
+
+    <!-- ════════════════ Slide 48 · 축 ① Obsidian ════════════════ -->
+    <section class="slide" data-slide="48">
+      <div class="s-head">
+        <div class="s-mark">KT</div>
+        <div><div class="s-head__meta">CHAPTER 4 · 개인 업무방식</div></div>
+        <div class="s-head__chip">4.2 · 축 ①</div>
+      </div>
+      <div class="s-body">
+        <div class="s-indicator">
+          <span class="s-indicator__num">①</span>
+          <span class="s-indicator__label">축 ① Obsidian Sync — 유료 동기화가 핵심</span>
+          <span class="s-indicator__line"></span>
+        </div>
+        <h2 class="s-title">Obsidian Sync — <strong>월 $8 유료 동기화</strong>가 멀티디바이스의 정답</h2>
+        <p class="s-lead">Obsidian은 <strong>마크다운 활용의 "끝판왕"</strong> — 논문 연구 · 깊은 지식 작업에 최적. 본체는 무료지만 <strong>실무 멀티디바이스 워크플로우의 핵심은 Obsidian Sync(공식 유료 서비스)</strong>다. 월 $8(연 $96) · E2EE · 버전 히스토리 · 모바일 네이티브 — 설정 없이 즉시 시작.</p>
+
+        <div class="kpi-grid kpi-grid--3">
+          <div class="kpi">
+            <div class="kpi__num">$8<small>/월</small></div>
+            <div class="kpi__label">Obsidian Sync · Standard</div>
+            <div class="kpi__src">연 $96 · 10 GB 볼트 · <strong>1년+ 버전 히스토리</strong> · 무제한 디바이스</div>
+          </div>
+          <div class="kpi">
+            <div class="kpi__num">E2EE</div>
+            <div class="kpi__label">End-to-End 암호화</div>
+            <div class="kpi__src">암호화 키는 <strong>사용자만 보유</strong> · Obsidian 서버도 내용 못 봄 · 회사 보안 정책에도 적합</div>
+          </div>
+          <div class="kpi">
+            <div class="kpi__num">5<small>+ 플랫폼</small></div>
+            <div class="kpi__label">크로스 플랫폼</div>
+            <div class="kpi__src">iOS · Android · macOS · Windows · Linux <strong>네이티브 앱</strong> · 동일 볼트</div>
+          </div>
+        </div>
+
+        <div class="two-col" style="margin-top:22px">
+          <div class="info-card">
+            <h3>Obsidian Sync 핵심 기능</h3>
+            <ul>
+              <li><strong>충돌 자동 해결</strong> — 두 기기 동시 편집해도 안전</li>
+              <li><strong>버전 히스토리</strong> — 1년+ 모든 변경 복구</li>
+              <li><strong>선택적 폴더 동기</strong> — 회사 / 개인 볼트 분리</li>
+              <li><strong>파일 복구</strong> — 실수 삭제 시 휴지통 복원</li>
+              <li><strong>실시간 반영</strong> — 폰 메모 → 1초 뒤 노트북에</li>
+              <li><strong>이미지 · 첨부 포함</strong> — .md 외 자산도 함께</li>
+            </ul>
+          </div>
+          <div class="info-card">
+            <h3>왜 다른 옵션 대신 Obsidian Sync인가</h3>
+            <ul>
+              <li><strong>iCloud Drive</strong> — Apple 한정 · <em>충돌 시 데이터 손실 사례 빈번</em></li>
+              <li><strong>Syncthing</strong> — P2P · 두 기기 동시 온라인 · <em>설정 복잡</em></li>
+              <li><strong>Git + GitHub</strong> — 기술자 한정 · <em>모바일 비실용</em></li>
+              <li><strong>Dropbox / Drive</strong> — 충돌 시 <em>conflict copy 무한 증식</em></li>
+              <li class="src">→ 비기술자가 즉시 · 안정적으로 · 모바일에서 쓸 수 있는 <strong>유일한 옵션</strong></li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="takeaway" style="margin-top:18px">
+          <div class="takeaway__icon">⤞</div>
+          <div>
+            <div class="takeaway__label">왜 AI 시대에 결정적인가</div>
+            <div class="takeaway__text">볼트 폴더가 <strong>모든 기기에 동일하게 존재</strong>하면 — Claude Code · Cursor · 로컬 LLM이 <strong>"내 지식 전체"를 LLM 컨텍스트로 즉시 활용</strong>한다. 별도 변환 · 파싱 · 업로드 단계가 없다. <em>월 $8이 만드는 가장 효율적인 개인 지식 인프라.</em></div>
+          </div>
+        </div>
+      </div>
+      <div class="s-foot">
+        <span class="s-foot__brand">KT <strong>Enterprise</strong><span class="dot">·</span>AI 시대의 업무방식</span>
+        <span class="s-foot__counter" data-counter></span>
+      </div>
+    </section>
+
+    <!-- ════════════════ Slide 49 · 축 ② Moonwave Memo ════════════════ -->
+    <section class="slide" data-slide="49">
+      <div class="s-head">
+        <div class="s-mark">KT</div>
+        <div><div class="s-head__meta">CHAPTER 4 · 개인 업무방식</div></div>
+        <div class="s-head__chip">4.3 · 축 ②</div>
+      </div>
+      <div class="s-body">
+        <div class="s-indicator">
+          <span class="s-indicator__num">②</span>
+          <span class="s-indicator__label">축 ② 클라우드 동기 메모 — Moonwave Memo</span>
+          <span class="s-indicator__line"></span>
+        </div>
+        <h2 class="s-title">Obsidian이 부담스럽다면 — <strong>자체 메모 앱</strong></h2>
+        <p class="s-lead"><strong>Obsidian이 너무 무거우면 개인화된 자체 메모 앱이 답</strong>이다. <strong>Moonwave Memo</strong>는 React 19 + Firebase + Tiptap + LangChain으로 만든 자체 개발 예시. 일상 메모 · 회의 노트 · 짧은 아이디어 캡처에 최적 — <em>본 발표자 본인의 워크플로우.</em></p>
+
+        <div class="two-col">
+          <div class="info-card">
+            <h3>핵심 기능 (Moonwave Memo 예시)</h3>
+            <ul>
+              <li><strong>Tiptap WYSIWYG</strong> — 마크다운 호환 리치 에디터</li>
+              <li><strong>Firebase Firestore</strong> — 실시간 멀티디바이스 동기</li>
+              <li><strong>Dexie (IndexedDB)</strong> — 오프라인 캐시 · 빠른 검색</li>
+              <li><strong>LangChain 멀티 AI</strong> — Anthropic + OpenAI + Google 동시</li>
+              <li><strong>D3-force 그래프</strong> — 메모 간 관계 시각화</li>
+              <li><strong>Fuse.js 퍼지 검색</strong> · 빠른 노트 발견</li>
+            </ul>
+          </div>
+          <div class="info-card">
+            <h3>패턴의 본질</h3>
+            <ul>
+              <li><strong>웹 우선</strong> · URL 하나로 접근 · PWA로 모바일 설치</li>
+              <li><strong>로컬 우선도</strong> · IndexedDB로 오프라인 동작</li>
+              <li><strong>AI 통합 내장</strong> · 작성 중 자동완성 · 편집 · 요약</li>
+              <li><strong>LangGraph 에이전트</strong> · 메모 자동 정리 · 분류 · 추천</li>
+              <li><strong>관찰 가능성</strong> · Sentry + LangSmith로 AI 호출 트레이스</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="takeaway" style="margin-top:24px">
+          <div class="takeaway__icon">⚡</div>
+          <div>
+            <div class="takeaway__label">자체 앱의 강점</div>
+            <div class="takeaway__text">기존 도구(Notion · Apple Notes)는 <em>AI 통합이 외부 의존</em>이다. 자체 앱은 <strong>내 메모 데이터의 흐름을 완전히 통제</strong>한다. 어떤 AI 모델을 · 어떻게 호출할지 · 어떤 데이터를 어디로 보낼지 모두 내 결정.</div>
+          </div>
+        </div>
+      </div>
+      <div class="s-foot">
+        <span class="s-foot__brand">KT <strong>Enterprise</strong><span class="dot">·</span>AI 시대의 업무방식</span>
+        <span class="s-foot__counter" data-counter></span>
+      </div>
+    </section>
+
+    <!-- ════════════════ Slide 50 · 축 ③ AI 전용 PC ════════════════ -->
+    <section class="slide" data-slide="50">
+      <div class="s-head">
+        <div class="s-mark">KT</div>
+        <div><div class="s-head__meta">CHAPTER 4 · 개인 업무방식</div></div>
+        <div class="s-head__chip">4.4 · 축 ③</div>
+      </div>
+      <div class="s-body">
+        <div class="s-indicator">
+          <span class="s-indicator__num">③</span>
+          <span class="s-indicator__label">축 ③ AI 전용 PC — 로컬 컴퓨팅</span>
+          <span class="s-indicator__line"></span>
+        </div>
+        <h2 class="s-title">AI 전용 PC — <strong>로컬 LLM</strong>과 개인 RAG</h2>
+        <p class="s-lead">메인 PC와 <strong>분리된 AI 전용 머신</strong>을 두면 작업 흐름이 바뀐다. 클라우드 API 비용 · 프라이버시 · 레이턴시 문제가 한꺼번에 사라지고, 메인 PC는 가벼워진다.</p>
+
+        <div class="two-col">
+          <div class="info-card">
+            <h3>왜 분리해야 하나</h3>
+            <ul>
+              <li><strong>프라이버시</strong> — 개인 메모 · 회의록 · 코드가 외부 안 나감</li>
+              <li><strong>비용</strong> — API 호출 → 전기료 (장기 압도적 절감)</li>
+              <li><strong>레이턴시</strong> — 서버 왕복 없이 즉시 응답</li>
+              <li><strong>작업 격리</strong> — 에이전트가 밤새 돌아도 메인 PC 영향 없음</li>
+              <li><strong>오프라인 가능</strong> — 인터넷 끊겨도 작동</li>
+              <li><strong>헤드리스 운영</strong> — <em>모니터 없는 서버</em>로도 충분 · SSH·원격 접근 · 책상 공간 절약</li>
+            </ul>
+          </div>
+          <div class="info-card">
+            <h3>무엇을 실행하나</h3>
+            <ul>
+              <li><strong>로컬 LLM</strong> · Llama 3 · Mistral · Qwen via <code>Ollama</code> · <code>LM Studio</code></li>
+              <li><strong>개인 RAG</strong> · Obsidian 볼트 + 메모 → 로컬 벡터 인덱스</li>
+              <li><strong>에이전트 작업</strong> · Claude Code · Cursor · 자동 PR · 리팩터</li>
+              <li><strong>배치 작업</strong> · 메일 분류 · 회의록 요약 · 자료 정리 (밤새)</li>
+              <li><strong>이미지 · 음성</strong> · Stable Diffusion · Whisper · TTS</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="kpi-grid kpi-grid--3" style="margin-top:22px">
+          <div class="kpi">
+            <div class="kpi__num">Mac mini<small> M4</small></div>
+            <div class="kpi__label">하드웨어 옵션 ①</div>
+            <div class="kpi__src">통합 메모리 24~64 GB · 조용 · 24/7 가동 적합</div>
+          </div>
+          <div class="kpi">
+            <div class="kpi__num">RTX 4090<small>+</small></div>
+            <div class="kpi__label">하드웨어 옵션 ②</div>
+            <div class="kpi__src">VRAM 24 GB · 큰 모델 가속 · Stable Diffusion 빠름</div>
+          </div>
+          <div class="kpi">
+            <div class="kpi__num">$1~3K</div>
+            <div class="kpi__label">초기 투자 (API 1년 비용 수준)</div>
+            <div class="kpi__src">이후 전기료만 — 장기 ROI 압도적</div>
+          </div>
+        </div>
+      </div>
+      <div class="s-foot">
+        <span class="s-foot__brand">KT <strong>Enterprise</strong><span class="dot">·</span>AI 시대의 업무방식</span>
+        <span class="s-foot__counter" data-counter></span>
+      </div>
+    </section>
+
+    <!-- ════════════════ Slide 51 · 통합 (4-layer) ════════════════ -->
+    <section class="slide" data-slide="51">
+      <div class="s-head">
+        <div class="s-mark">KT</div>
+        <div><div class="s-head__meta">CHAPTER 4 · 개인 업무방식</div></div>
+        <div class="s-head__chip">4.5 · 통합</div>
+      </div>
+      <div class="s-body">
+        <div class="s-indicator">
+          <span class="s-indicator__num">4.5</span>
+          <span class="s-indicator__label">3 축이 합쳐지면 — 개인용 AI 시스템</span>
+          <span class="s-indicator__line"></span>
+        </div>
+        <h2 class="s-title">개인의 지식이 <strong>어디서나, AI와 함께</strong></h2>
+        <p class="s-lead">세 축은 대안이 아니라 보완이다. <strong>입력층(메모) → 동기층 → AI 컴퓨팅층 → 출력층</strong>의 4계층 구조로 합쳐진다.</p>
+
+        <div class="arch-stack">
+          <div class="arch-row arch-row--frontend">
+            <div class="arch-row__icon">IN</div>
+            <div class="arch-row__head">
+              <div class="arch-row__title">입력층 · 개인 지식 캡처</div>
+              <div class="arch-row__desc">Obsidian 볼트 · Moonwave Memo · 손글씨(OCR) · 회의 녹음(Whisper) — <strong>모든 입력이 결국 .md로 수렴</strong></div>
+            </div>
+            <div class="arch-row__tech">
+              <span>Obsidian</span><span>Memo</span><span>Whisper</span><span>OCR</span>
+            </div>
+          </div>
+          <div class="arch-arrow-row">
+            <span class="arch-arrow-row__label">자동 동기화</span>
+          </div>
+          <div class="arch-row arch-row--backend">
+            <div class="arch-row__icon">SYNC</div>
+            <div class="arch-row__head">
+              <div class="arch-row__title">동기층 · 멀티디바이스 통합</div>
+              <div class="arch-row__desc"><strong>Obsidian Sync</strong>(논문/연구용 · 월 $8 · E2EE) · <strong>Firebase</strong>(자체 메모 앱용) · Git / iCloud — <strong>데스크탑 · 노트북 · 태블릿 · 폰이 같은 자료</strong></div>
+            </div>
+            <div class="arch-row__tech">
+              <span class="strong">Obsidian Sync</span><span>Firebase</span><span>Git</span><span>iCloud</span>
+            </div>
+          </div>
+          <div class="arch-arrow-row">
+            <span class="arch-arrow-row__label">파일 변경 감지 · 자동 인덱싱</span>
+          </div>
+          <div class="arch-row arch-row--rag">
+            <div class="arch-row__icon">AI</div>
+            <div class="arch-row__head">
+              <div class="arch-row__title">컴퓨팅층 · AI 전용 PC</div>
+              <div class="arch-row__desc">로컬 LLM(Llama · Mistral) + 개인 RAG(메모 벡터 인덱스) + 에이전트 — <strong>"내 일을 아는 AI"</strong></div>
+            </div>
+            <div class="arch-row__tech">
+              <span class="strong">Ollama</span><span>Local RAG</span><span>Claude Code</span><span>Agents</span>
+            </div>
+          </div>
+          <div class="arch-arrow-row">
+            <span class="arch-arrow-row__label">개인화된 응답 · 자동 정리</span>
+          </div>
+          <div class="arch-row arch-row--db">
+            <div class="arch-row__icon">OUT</div>
+            <div class="arch-row__head">
+              <div class="arch-row__title">출력층 · 자동화된 일</div>
+              <div class="arch-row__desc">자동 회의록 · 코드 PR 제안 · 답장 초안 · 일정 조정 · 학습 요약 — <strong>"내가 한 게 아닌데 내가 한 것"</strong></div>
+            </div>
+            <div class="arch-row__tech">
+              <span>회의록</span><span>코드 PR</span><span>답장 초안</span><span>요약</span>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="s-foot">
+        <span class="s-foot__brand">KT <strong>Enterprise</strong><span class="dot">·</span>AI 시대의 업무방식</span>
+        <span class="s-foot__counter" data-counter></span>
+      </div>
+    </section>
+
+    <!-- ════════════════ Slide 52 · Chapter 4 결론 ════════════════ -->
+    <section class="slide" data-slide="52">
+      <div class="s-head">
+        <div class="s-mark">KT</div>
+        <div><div class="s-head__meta">CHAPTER 4 · 개인 업무방식</div></div>
+        <div class="s-head__chip">결론</div>
+      </div>
+      <div class="s-body">
+        <div class="s-indicator">
+          <span class="s-indicator__num">4.6</span>
+          <span class="s-indicator__label">Chapter 4 결론 — 5 권고</span>
+          <span class="s-indicator__line"></span>
+        </div>
+        <h2 class="s-title">개인의 일하는 방식도 <strong>같은 원칙</strong>을 따른다</h2>
+        <p class="s-lead">Chapter 1~3이 조직의 텍스트 자산화 · AI 워크플로우 · 신규 시스템 패턴이었다면, Chapter 4는 그 패턴이 <strong>한 명의 개인에게 적용</strong>되었을 때의 모습. 본질은 같다.</p>
+
+        <div class="recs">
+          <div class="rec">
+            <span class="rec__num">①</span>
+            <span class="rec__title">Obsidian + Sync</span>
+            <span class="rec__desc">논문 · 연구급 작업은 끝판왕 + 월 $8 Sync</span>
+          </div>
+          <div class="rec">
+            <span class="rec__num">②</span>
+            <span class="rec__title">부담스러우면 자체 앱</span>
+            <span class="rec__desc">일상 메모는 자체 메모 앱 · Notion 대안</span>
+          </div>
+          <div class="rec">
+            <span class="rec__num">③</span>
+            <span class="rec__title">멀티디바이스 통합</span>
+            <span class="rec__desc">Obsidian Sync · Firebase · Git 중 하나로</span>
+          </div>
+          <div class="rec">
+            <span class="rec__num">④</span>
+            <span class="rec__title">AI 전용 PC · 서버</span>
+            <span class="rec__desc">Mac mini M4 · GPU PC · 헤드리스 서버 옵션</span>
+          </div>
+          <div class="rec">
+            <span class="rec__num">⑤</span>
+            <span class="rec__title">로컬 RAG 구축</span>
+            <span class="rec__desc">개인 메모 → 벡터 → Claude Code · Cursor 참조</span>
+          </div>
+        </div>
+
+        <div class="takeaway" style="margin-top:28px;background:linear-gradient(135deg,var(--kt-red-50),#fff);border-left-color:var(--kt-red-600)">
+          <div class="takeaway__icon" style="background:var(--kt-red-600)">→</div>
+          <div>
+            <div class="takeaway__label">CHAPTER 4 · 핵심 명제</div>
+            <div class="takeaway__text">조직의 일하는 방식이 바뀌면, <strong>그 조직 안 개인의 일하는 방식도 같은 패턴으로 바뀐다.</strong> 텍스트 자산화 · 디바이스 통합 · AI가 컨텍스트로 활용 — <strong>개인부터 시작 → 팀 → 조직</strong>으로 확장된다. <em>본 발표 자료 자체가 한 개인의 메모 · AI · 디바이스가 결합된 산출물의 예다.</em></div>
+          </div>
+        </div>
+      </div>
+      <div class="s-foot">
+        <span class="s-foot__brand">KT <strong>Enterprise</strong><span class="dot">·</span>AI 시대의 업무방식</span>
+        <span class="s-foot__counter" data-counter></span>
+      </div>
+    </section>
+
   </div>
 </div>
 
@@ -3678,7 +4152,7 @@ result = (df
   <button id="deck-prev" type="button" aria-label="이전 슬라이드 (←)">
     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="15 18 9 12 15 6"/></svg>
   </button>
-  <span class="deck-counter"><em id="deck-cur">1</em><span class="sep">/</span><span id="deck-total">44</span></span>
+  <span class="deck-counter"><em id="deck-cur">1</em><span class="sep">/</span><span id="deck-total">52</span></span>
   <button id="deck-next" type="button" aria-label="다음 슬라이드 (→)">
     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="9 18 15 12 9 6"/></svg>
   </button>
@@ -3723,6 +4197,7 @@ result = (df
     else if (i === 1) el.innerHTML = 'CHAPTER 1';
     else if (i === 17) el.innerHTML = 'CHAPTER 2';
     else if (i === 31) el.innerHTML = 'CHAPTER 3';
+    else if (i === 44) el.innerHTML = 'CHAPTER 4';
     else el.innerHTML = '<em>'+n+'</em> / '+t;
   });
 
